@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",
+    #"django.contrib.sites",
     #3rd
     "crispy_forms",
     "crispy_bootstrap5",
@@ -53,10 +53,20 @@ CRISPY_TEMPLATE_PACKS = "bootstrap"
 
 #django all auth set
 SITE_ID = 1
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT= "home"
+AUTHENTICATION_BACKENDS =(
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+) 
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend",
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "allauth.account.middleware.AccountMiddleware",#allauth
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -146,5 +156,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.CustomUSer"
 
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
