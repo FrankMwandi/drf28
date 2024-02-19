@@ -1,12 +1,18 @@
 from pathlib import Path
+from environs import Env
+
+
+env = Env()
+env.read_env()
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-s@i+wn+cck^2)!_bngogfcq-)xssh9)l_!)$9#8!9)d6f6!fdx"
 
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.heroku.com', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
 INSTALLED_APPS = [
@@ -77,14 +83,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "django_project.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "db",
-        "PORT": 5432,
-    }
+    "default": env.dj_db_url("DATABASE_URL",
+    default="postgres://postgres@db/postgres")
 }
 
 AUTH_PASSWORD_VALIDATORS = [
