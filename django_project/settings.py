@@ -8,7 +8,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-s@i+wn+cck^2)!_bngogfcq-)xssh9)l_!)$9#8!9)d6f6!fdx"
+#SECRET_KEY = "django-insecure-s@i+wn+cck^2)!_bngogfcq-)xssh9)l_!)$9#8!9)d6f6!fdx"
 
 DEBUG = env.bool("DJANGO_DEBUG")
 
@@ -27,8 +27,10 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
+    #local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
+    "books.apps.BooksConfig",
 ]
 
 #All auth config
@@ -41,7 +43,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
