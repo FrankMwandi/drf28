@@ -118,3 +118,6 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.CustomUSer"
+
+DEFAULT_FROM_EMAIL = "admin@djangobookstore.com" 
+SITE_ID = 1
