@@ -8,6 +8,13 @@
     <h2><a  href="">{{book.title}}<a/></h2>
     <p> Author : {{book.author}} </p>
     <p> Price : {{book.price}} </p>
+    <div>
+        <ul>
+            {% for review in book.review.all %}
+                <li> {{review.review}} (reviewed by {{review.author}}) </li>
+            {% endfor %}    
+        </ul>
+    </div>
 </div>
 {% endblock content %}
     
