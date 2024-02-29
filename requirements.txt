@@ -8,3 +8,4 @@ crispy-bootstrap5==0.6
 black 
 django-allauth
 environs[django]
+pillow==10.1.0

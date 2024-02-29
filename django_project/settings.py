@@ -123,3 +123,8 @@ AUTH_USER_MODEL = "accounts.CustomUSer"
 
 DEFAULT_FROM_EMAIL = "admin@djangobookstore.com" 
 SITE_ID = 1
+
+#Media 
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR/"media"
