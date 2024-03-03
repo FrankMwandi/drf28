@@ -1,5 +1,6 @@
 from pathlib import Path
 from environs import Env
+import socket
 
 
 env = Env()
@@ -15,6 +16,10 @@ DEBUG = env.bool("DJANGO_DEBUG")
 ALLOWED_HOSTS = ['localhost', '.heroku.com', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
+
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -27,6 +32,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
+    "debug_toolbar",
     #local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
@@ -54,6 +60,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 
 MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "allauth.account.middleware.AccountMiddleware",
@@ -62,7 +69,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware", 
 ]
+CACHE_MIDDLEWARE_ALIAS = "default"
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
 
 ROOT_URLCONF = "django_project.urls"
 
